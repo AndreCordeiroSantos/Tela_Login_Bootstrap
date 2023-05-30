@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt=br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <!-- Inclua o CSS e o JavaScript do Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+
+    <!-- Script para verificar caracteres que não devem ser digitados-->
+    <!-- Caso esteja no caracter inválido, desativa o botao Entrar-->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var loginInput = document.getElementById('login');
+            var senhaInput = document.getElementById('senha');
+            var mensagemErro = document.getElementById('mensagem-erro');
+            var entrarButton = document.getElementById('entrar-button');
+
+            loginInput.addEventListener('input', function () {
+                var login = this.value;
+
+                var caracteresEspeciais = ['.', ',', '(', ')', '[', ']', '~', '´', '!', '`', "'", '#', '@', '$', '%', '¨', '&', '*', '<', '>', '/', '\\', '-', '+', ':', ';', '?'];
+
+                var contemCaractereEspecial = caracteresEspeciais.some(function (caractere) {
+                    return login.includes(caractere);
+                });
+
+                if (contemCaractereEspecial) {
+                    this.classList.add('error');
+                    mensagemErro.textContent = 'Caractere inválido.';
+                    entrarButton.disabled = true; // Desativa o botão de Entrar
+                } else {
+                    this.classList.remove('error');
+                    mensagemErro.textContent = '';
+                    entrarButton.disabled = false; // Ativa o botão de Entrar
+                }
+            });
+
+            senhaInput.addEventListener('input', function () {
+                var senha = this.value;
+
+                var caracteresEspeciais = ['.', ',', '(', ')', '[', ']', '~', '´', '!', '`', "'", '#', '@', '$', '%', '¨', '&', '*', '<', '>', '/', '\\', '-', '+', ':', ';', '?'];
+
+                var contemCaractereEspecial = caracteresEspeciais.some(function (caractere) {
+                    return senha.includes(caractere);
+                });
+
+                if (contemCaractereEspecial) {
+                    this.classList.add('error');
+                    mensagemErro.textContent = 'Caractere inválido.';
+                    entrarButton.disabled = true; // Desativa o botão de Entrar
+                } else {
+                    this.classList.remove('error');
+                    mensagemErro.textContent = '';
+                    entrarButton.disabled = false; // Ativa o botão de Entrar
+                }
+            });
+        });
+    </script>
+
+    <!-- Frame para apontar o input que ta errado.-->
+    <style>
+        .mensagem-erro {
+            color: red;
+        }
+
+        .error {
+            animation: shake 0.5s;
+            border-color: #f81212;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            50% {
+                transform: translateX(5px);
+            }
+
+            75% {
+                transform: translateX(-5px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+    </style>
+
+    <!--CSS-->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/media.css">
+
+    <!-- Campo do ícone da página-->
+    <link rel="icon" sizes="18x18" href="img/favicon-16x16.png">
+</head>
+
+<body>
+    <!-- Box da informação-->
+    <div id="container">
+        <div class="banner">
+            <img src="img/pj.png" style="margin:5px; width: 40%" alt="Logo Empresa">
+            <p style="color: #fff; font-weight: 400;">
+                Seja bem vindo ao sistema Projeto XAXIM
+                <br>Sistema de Gestão de chamados.
+                <br>
+                <br>Criado por André Rafael Santos, 2023.
+                <br>
+            <h1><a href="https://github.com/AndreCordeiroSantos">git Hub </a></h1>
+            </p>
+        </div>
+
+        <!-- Box do login -->
+        <div class="box-login">
+            <h2>
+                Olá!<br>
+                Seja bem vindo.
+            </h2>
+            <div class="box">
+                <!-- formulário apontando para um php, para fazer a validação de login e senha-->
+                <form method="POST" action="login.php">
+                    <h2>faça o seu login agora</h2>
+                    <br>
+                    <input type="text" name="login" id="login" placeholder="informe seu login:">
+                    <span id="mensagem-erro" class="mensagem-erro"></span>
+                    <input type="password" name="senha" id="senha" placeholder="informe sua senha:">
+                    <br><br>
+                    <input type="submit" class="submit" name="submit" value="Entrar">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
